@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ishan Shukla — Backend Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: #0a0a0a;
+      color: #f0f0f0;
+      font-family: 'Space Grotesk', sans-serif;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .mono { font-family: 'Space Mono', monospace; }
+
+    /* NAV */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 40px;
+      border-bottom: 1px solid #1e1e1e;
+      position: sticky;
+      top: 0;
+      background: #0a0a0a;
+      z-index: 100;
+    }
+
+    .nav-logo {
+      font-family: 'Space Mono', monospace;
+      font-size: 13px;
+      color: #f0f0f0;
+      letter-spacing: 0.08em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+    }
+
+    .nav-links a {
+      font-size: 12px;
+      color: #777;
+      text-decoration: none;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: color 0.15s;
+    }
+
+    .nav-links a:hover { color: #f0f0f0; }
+
+    .btn-primary {
+      background: #2a9df4;
+      color: #000;
+      border: 1px solid #2a9df4;
+      padding: 8px 18px;
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      font-weight: 700;
+      transition: all 0.15s;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-primary:hover { background: #fff; border-color: #fff; }
+
+    .btn-ghost {
+      background: transparent;
+      color: #666;
+      border: 1px solid #2a2a2a;
+      padding: 11px 24px;
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.15s;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-ghost:hover { border-color: #555; color: #f0f0f0; }
+
+    /* HERO */
+    .hero {
+      padding: 64px 40px 48px;
+      border-bottom: 1px solid #1e1e1e;
+    }
+
+    .hero-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      color: #2a9df4;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .hero-label::before {
+      content: '';
+      display: block;
+      width: 24px;
+      height: 1px;
+      background: #2a9df4;
+    }
+
+    .hero-name {
+      font-size: 80px;
+      font-weight: 700;
+      line-height: 0.92;
+      letter-spacing: -0.03em;
+      color: #f0f0f0;
+      margin-bottom: 4px;
+    }
+
+    .hero-name span { color: #2a9df4; }
+
+    .hero-role {
+      font-size: 80px;
+      font-weight: 700;
+      line-height: 0.92;
+      letter-spacing: -0.03em;
+      color: transparent;
+      -webkit-text-stroke: 1px #2a2a2a;
+      margin-bottom: 40px;
+    }
+
+    .hero-row {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .hero-desc {
+      font-size: 14px;
+      color: #666;
+      line-height: 1.7;
+      max-width: 420px;
+    }
+
+    .hero-stats {
+      display: flex;
+      border: 1px solid #1e1e1e;
+    }
+
+    .stat-box {
+      padding: 16px 28px;
+      border-right: 1px solid #1e1e1e;
+      text-align: center;
+    }
+
+    .stat-box:last-child { border-right: none; }
+
+    .stat-num {
+      font-family: 'Space Mono', monospace;
+      font-size: 22px;
+      font-weight: 700;
+      color: #f0f0f0;
+      display: block;
+    }
+
+    .stat-label {
+      font-size: 10px;
+      color: #444;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-top: 2px;
+      display: block;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 12px;
+      margin-top: 32px;
+      flex-wrap: wrap;
+    }
+
+    /* SECTION HEADER */
+    .section-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 28px 40px 20px;
+    }
+
+    .section-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      color: #444;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-label span { color: #2a9df4; }
+
+    .section-count {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      color: #333;
+      letter-spacing: 0.1em;
+    }
+
+    /* PROJECTS */
+    .projects-section { border-bottom: 1px solid #1e1e1e; }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      border-top: 1px solid #1e1e1e;
+    }
+
+    .project-card {
+      padding: 28px 32px;
+      border-right: 1px solid #1e1e1e;
+      border-bottom: 1px solid #1e1e1e;
+      cursor: pointer;
+      transition: background 0.15s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-card:nth-child(2n) { border-right: none; }
+    .project-card:hover { background: #0f0f0f; }
+    .project-card:hover .proj-arrow { opacity: 1; transform: translate(0, 0); }
+    .project-card:hover .proj-bar-fill { width: 100%; }
+
+    .proj-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .proj-num {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      color: #2a9df4;
+      letter-spacing: 0.1em;
+    }
+
+    .proj-arrow {
+      font-size: 16px;
+      color: #2a9df4;
+      opacity: 0;
+      transform: translate(-4px, 4px);
+      transition: all 0.2s;
+    }
+
+    .proj-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #f0f0f0;
+      margin-bottom: 8px;
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+    }
+
+    .proj-desc {
+      font-size: 12px;
+      color: #555;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .proj-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      color: #444;
+      border: 1px solid #1e1e1e;
+      padding: 3px 8px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .tag-blue {
+      color: #2a9df4;
+      border-color: rgba(42, 157, 244, 0.25);
+      background: rgba(42, 157, 244, 0.04);
+    }
+
+    .proj-bar {
+      height: 1px;
+      background: #1e1e1e;
+      margin-top: 20px;
+      overflow: hidden;
+    }
+
+    .proj-bar-fill {
+      height: 100%;
+      background: #2a9df4;
+      width: 0;
+      transition: width 1s ease;
+    }
+
+    /* FEATURED CARD */
+    .project-card.featured {
+      grid-column: span 2;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      background: #0c0c0c;
+      border-right: none;
+    }
+
+    .featured-badge {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      color: #2a9df4;
+      border: 1px solid rgba(42, 157, 244, 0.3);
+      padding: 3px 10px;
+      letter-spacing: 0.1em;
+      display: inline-block;
+      margin-bottom: 16px;
+    }
+
+    .featured-title {
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: #f0f0f0;
+      line-height: 1.1;
+      margin-bottom: 12px;
+    }
+
+    .feat-visual {
+      background: #111;
+      border: 1px solid #1e1e1e;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      justify-content: center;
+      min-height: 160px;
+    }
+
+    .feat-code {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      color: #333;
+      line-height: 1.8;
+    }
+
+    .feat-code .kw { color: #2a9df4; }
+    .feat-code .str { color: #888; }
+
+    .feat-pills {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+
+    .feat-pill {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      border: 1px solid #1e1e1e;
+      padding: 3px 8px;
+      color: #444;
+    }
+
+    .feat-pill.green {
+      color: #22c55e;
+      border-color: rgba(34, 197, 94, 0.2);
+    }
+
+    /* TECH STACK BENTO */
+    .bento-section { border-bottom: 1px solid #1e1e1e; }
+
+    .bento-grid {
+      padding: 0 40px 32px;
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 10px;
+    }
+
+    .bento-cell {
+      border: 1px solid #1e1e1e;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      transition: border-color 0.15s, background 0.15s;
+    }
+
+    .bento-cell:hover {
+      border-color: #2a9df4;
+      background: rgba(42, 157, 244, 0.03);
+    }
+
+    .bento-cell.span2 { grid-column: span 2; }
+    .bento-cell.span3 { grid-column: span 3; }
+
+    .bento-icon {
+      font-family: 'Space Mono', monospace;
+      font-size: 18px;
+      font-weight: 700;
+      color: #f0f0f0;
+      letter-spacing: -0.02em;
+    }
+
+    .bento-icon.accent { color: #2a9df4; }
+
+    .bento-name {
+      font-size: 12px;
+      font-weight: 600;
+      color: #f0f0f0;
+    }
+
+    .bento-cat {
+      font-size: 9px;
+      color: #333;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-family: 'Space Mono', monospace;
+    }
+
+    .bento-lvl {
+      display: flex;
+      gap: 3px;
+      margin-top: 4px;
+    }
+
+    .lvl-dot { width: 14px; height: 2px; background: #1e1e1e; }
+    .lvl-dot.on { background: #2a9df4; }
+
+    .bento-cell.dark-blue {
+      background: rgba(42, 157, 244, 0.06);
+      border-color: rgba(42, 157, 244, 0.2);
+    }
+
+    .bento-cell.dark-blue .bento-cat { color: rgba(42, 157, 244, 0.5); }
+
+    /* FOOTER */
+    footer {
+      padding: 24px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid #1e1e1e;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .footer-mono {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      color: #333;
+      letter-spacing: 0.1em;
+    }
+
+    .footer-links { display: flex; gap: 20px; }
+
+    .footer-link {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      color: #333;
+      text-decoration: none;
+      letter-spacing: 0.08em;
+      transition: color 0.15s;
+    }
+
+    .footer-link:hover { color: #2a9df4; }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      nav { padding: 14px 20px; }
+      .nav-links { display: none; }
+      .hero { padding: 40px 20px 32px; }
+      .hero-name, .hero-role { font-size: 48px; }
+      .hero-row { flex-direction: column; align-items: flex-start; }
+      .section-head { padding: 20px 20px 14px; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .project-card.featured { grid-column: span 1; grid-template-columns: 1fr; }
+      .project-card:nth-child(2n) { border-right: 1px solid #1e1e1e; }
+      .bento-grid { padding: 0 20px 24px; grid-template-columns: repeat(2, 1fr); }
+      .bento-cell.span2, .bento-cell.span3 { grid-column: span 2; }
+      footer { padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <span class="nav-logo mono">ISHAN SHUKLA</span>
+    <div class="nav-links">
+      <a href="#work">Work</a>
+      <a href="#stack">Stack</a>
+    </div>
+    <a href="Ishan_resume.pdf" class="btn-primary">Resume ↓</a>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-label">Backend Developer · CSE</div>
+    <div class="hero-name">ISHAN<span>.</span></div>
+    <div class="hero-role">BACKEND.</div>
+    <div class="hero-row">
+      <p class="hero-desc">
+        Backend developer focused on building production-grade systems.
+        FastAPI, PostgreSQL, Redis, Docker, WebSockets — real infrastructure,
+        written from scratch.
+      </p>
+      <div class="hero-stats">
+        <div class="stat-box">
+          <span class="stat-num">3+</span>
+          <span class="stat-label">Projects</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-num">C++</span>
+          <span class="stat-label">Primary</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-num">PY</span>
+          <span class="stat-label">Backend</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-cta">
+      <a href="#work" class="btn-primary">View Projects ↓</a>
+      <a href="https://github.com/IshanXshuk1aa" target="_blank" class="btn-ghost">GitHub ↗</a>
+      <a href="www.linkedin.com/in/ishan-shukla-8353a3323" target="_blank" class="btn-ghost">LinkedIn ↗</a>
+    </div>
+  </section>
+
+  <section class="projects-section" id="work">
+    <div class="section-head">
+      <span class="section-label"><span>01</span> — Featured Work</span>
+      <span class="section-count mono">03 PROJECTS</span>
+    </div>
+    <div class="projects-grid">
+
+      <!-- FEATURED -->
+      <div class="project-card featured">
+        <div>
+          <div class="featured-badge">FEATURED PROJECT</div>
+          <div class="proj-num">001</div>
+          <div class="featured-title">Delhi Metro<br>Live Tracker</div>
+          <p class="proj-desc" style="font-size:12px;color:#555;line-height:1.7;margin-top:10px;margin-bottom:16px;">
+            Full-stack real-time metro simulation using actual DMRC GTFS coordinates.
+            WebSocket-driven position updates, Redis pub/sub for live feeds,
+            Leaflet.js dark map UI. Zero AI-generated lines.
+          </p>
+          <div class="proj-tags" style="margin-bottom:16px;">
+            <span class="tag tag-blue">FastAPI</span>
+            <span class="tag tag-blue">WebSockets</span>
+            <span class="tag tag-blue">Redis</span>
+            <span class="tag">PostgreSQL</span>
+            <span class="tag">Docker</span>
+            <span class="tag">Leaflet.js</span>
+            <span class="tag">GTFS</span>
+          </div>
+          <a href="https://github.com/IshanXshuk1aa/Metro-Tracker" target="_blank" class="btn-ghost" style="font-size:9px;padding:8px 16px;">View on GitHub ↗</a>
+        </div>
+        <div class="feat-visual">
+          <div class="feat-code">
+            <div><span class="kw">WS</span> <span class="str">/ws/metro/live</span></div>
+            <div style="color:#2a9df4;margin:4px 0;">▶ EVENT STREAM</div>
+            <div><span class="str">{ station: "Rajiv Chowk",</span></div>
+            <div><span class="str">&nbsp;&nbsp;lat: 28.6328, lng: 77.2197,</span></div>
+            <div><span class="str">&nbsp;&nbsp;next_in: "2m 14s" }</span></div>
+            <div style="margin-top:8px;padding-top:8px;border-top:1px solid #1e1e1e;color:#333;">
+              Redis PubSub → FastAPI → Leaflet
+            </div>
+          </div>
+          <div class="feat-pills">
+            <span class="feat-pill green">● LIVE</span>
+            <span class="feat-pill">285 STATIONS</span>
+            <span class="feat-pill">&lt;50ms LATENCY</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROJECT 002 -->
+      <div class="project-card">
+        <div class="proj-top">
+          <span class="proj-num">002</span>
+          <span class="proj-arrow">↗</span>
+        </div>
+        <div class="proj-title">Medical Report Analyzer</div>
+        <p class="proj-desc">
+          Upload any PDF blood report or diagnostic doc and get an instant plain-English breakdown.
+         PDF text extraction, and an AI-powered interpretation layer
+          with structured Standard English output.
+        </p>
+        <div class="proj-tags">
+          <span class="tag tag-blue">FastAPI</span>
+          <span class="tag tag-blue">Python</span>
+          <span class="tag">PDF Parsing</span>
+          <span class="tag">Gemini API</span>
+          <span class="tag">Docker</span>
+        </div>
+        <div class="proj-bar"><div class="proj-bar-fill"></div></div>
+      </div>
+
+      <!-- PROJECT 003 -->
+      <div class="project-card">
+        <div class="proj-top">
+          <span class="proj-num">003</span>
+          <span class="proj-arrow">↗</span>
+        </div>
+        <div class="proj-title">Dhaara — AI Traffic</div>
+        <p class="proj-desc">
+          Real-time AI-based traffic management system. OpenCV for density monitoring,
+          Python for signal control logic. Adaptive signal timing using live camera feed analysis.
+        </p>
+        <div class="proj-tags">
+          <span class="tag tag-blue">Python</span>
+          <span class="tag">OpenCV</span>
+          <span class="tag tag-blue">MediaPipe</span>
+          <span class="tag">Flask</span>
+        </div>
+        <div class="proj-bar"><div class="proj-bar-fill"></div></div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="bento-section" id="stack">
+    <div class="section-head">
+      <span class="section-label"><span>02</span> — Tech Stack</span>
+      <span class="section-count mono">CORE TOOLS</span>
+    </div>
+    <div class="bento-grid">
+
+      <div class="bento-cell span2 dark-blue">
+        <div class="bento-icon accent">C++</div>
+        <div class="bento-name">C++ / STL</div>
+        <div class="bento-cat">Primary Language</div>
+        <div class="bento-lvl">
+          <div class="lvl-dot on"></div><div class="lvl-dot on"></div>
+          <div class="lvl-dot on"></div><div class="lvl-dot on"></div><div class="lvl-dot on"></div>
+        </div>
+      </div>
+
+      <div class="bento-cell span2">
+        <div class="bento-icon">PY</div>
+        <div class="bento-name">Python</div>
+        <div class="bento-cat">Backend</div>
+        <div class="bento-lvl">
+          <div class="lvl-dot on"></div><div class="lvl-dot on"></div>
+          <div class="lvl-dot on"></div><div class="lvl-dot on"></div><div class="lvl-dot"></div>
+        </div>
+      </div>
+
+      <div class="bento-cell span2">
+        <div class="bento-icon">SQL</div>
+        <div class="bento-name">PostgreSQL</div>
+        <div class="bento-cat">Database</div>
+        <div class="bento-lvl">
+          <div class="lvl-dot on"></div><div class="lvl-dot on"></div>
+          <div class="lvl-dot on"></div><div class="lvl-dot on"></div><div class="lvl-dot"></div>
+        </div>
+      </div>
+
+      <div class="bento-cell span3">
+        <div class="bento-icon accent">FastAPI</div>
+        <div class="bento-name">FastAPI + SQLAlchemy + Pydantic</div>
+        <div class="bento-cat">API Framework</div>
+        <div class="bento-lvl">
+          <div class="lvl-dot on"></div><div class="lvl-dot on"></div>
+          <div class="lvl-dot on"></div><div class="lvl-dot on"></div><div class="lvl-dot"></div>
+        </div>
+      </div>
+
+      <div class="bento-cell">
+        <div class="bento-icon">Re</div>
+        <div class="bento-name">Redis</div>
+        <div class="bento-cat">Cache / Pub-Sub</div>
+        <div class="bento-lvl">
+          <div class="lvl-dot on"></div><div class="lvl-dot on"></div>
+          <div class="lvl-dot on"></div><div class="lvl-dot"></div><div class="lvl-dot"></div>
+        </div>
+      </div>
+
+      <div class="bento-cell">
+        <div class="bento-icon">🐳</div>
+        <div class="bento-name">Docker</div>
+        <div class="bento-cat">Containers</div>
+        <div class="bento-lvl">
+          <div class="lvl-dot on"></div><div class="lvl-dot on"></div>
+          <div class="lvl-dot on"></div><div class="lvl-dot"></div><div class="lvl-dot"></div>
+        </div>
+      </div>
+
+      <div class="bento-cell">
+        <div class="bento-icon">WS</div>
+        <div class="bento-name">WebSockets</div>
+        <div class="bento-cat">Real-time</div>
+        <div class="bento-lvl">
+          <div class="lvl-dot on"></div><div class="lvl-dot on"></div>
+          <div class="lvl-dot on"></div><div class="lvl-dot on"></div><div class="lvl-dot"></div>
+        </div>
+      </div>
+
+      <div class="bento-cell">
+        <div class="bento-icon">GH</div>
+        <div class="bento-name">Git / GitHub</div>
+        <div class="bento-cat">Version Control</div>
+        <div class="bento-lvl">
+          <div class="lvl-dot on"></div><div class="lvl-dot on"></div>
+          <div class="lvl-dot on"></div><div class="lvl-dot on"></div><div class="lvl-dot"></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <span class="footer-mono">© 2025 ISHAN SHUKLA</span>
+    <div class="footer-links">
+      <a href="https://github.com/IshanXshuk1aa" target="_blank" class="footer-link">GitHub</a>
+      <a href="www.linkedin.com/in/ishan-shukla-8353a3323" target="_blank" class="footer-link">LinkedIn</a>
+      
+    </div>
+    <span class="footer-mono">AGRA, IN</span>
+  </footer>
+
+</body>
+</html>
